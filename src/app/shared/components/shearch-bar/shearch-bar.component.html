@@ -1,0 +1,38 @@
+<div class="col">
+  <div class="input-group mb-3">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Bitcoin, Polygon, Maricoin, Ethereum"
+      [(ngModel)]="query"
+      (keyup)="search()"
+    />
+    <button class="btn btn-primary" type="button"><b>Search</b></button>
+  </div>
+  <ul class="list-group col" *ngIf="query.trim().length > 0">
+    <li
+      class="list-group-item li-result"
+      *ngFor="let item of results"
+      routerLink="/chart/{{ item.id }}"
+    >
+      <span>
+        <img
+          src="https://assets.coincap.io/assets/icons/{{
+            item.symbol | lowercase
+          }}@2x.png"
+          alt="Icon"
+          width="32px"
+          loading="lazy"
+        />
+        <span> </span>
+        <b>{{ item.name | titlecase }}</b>
+      </span>
+    </li>
+    <li
+      class="list-group-item"
+      *ngIf="results.length === 0 && query.trim().length > 0"
+    >
+      no results for <b>"{{ query }}"</b>
+    </li>
+  </ul>
+</div>

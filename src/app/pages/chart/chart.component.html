@@ -1,0 +1,33 @@
+<span class="btn btn-primary" routerLink=""
+  ><i class="pi pi-arrow-left"></i> Back</span
+>
+<div class="container text-center">
+  <div class="row">
+    <span class="col"
+      ><img
+        src="https://assets.coincap.io/assets/icons/{{
+          info.symbol | lowercase
+        }}@2x.png"
+        alt=""
+      />
+      <b class="title">{{ coin | titlecase }}</b>
+    </span>
+    <div class="col">
+      <b class="row">Info</b>
+      <div class="row">Ticker: {{ info?.symbol }}</div>
+      <div class="row">
+        Market Cap: {{ info.marketCapUsd | currency: "USD":"symbol":".2-6" }}
+      </div>
+      <div class="row">
+        Actual Price: {{ info.priceUsd | currency: "USD":"symbol":".2-4" }}
+      </div>
+      <div class="row">Actual Supply: {{ info.supply | number }}</div>
+      <div class="row">Max Supply: {{ info.maxSupply | number }}</div>
+      <div class="row">
+        Change(24h): {{ info.changePercent24Hr / 100 | percent: ".2-2" }}
+      </div>
+    </div>
+  </div>
+
+  <div class="row"><app-charted></app-charted></div>
+</div>

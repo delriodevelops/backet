@@ -1,0 +1,50 @@
+<div class="card" *ngIf="!loading">
+  <h1 *ngIf="!!loading">Loading...</h1>
+  <p-table
+    [value]="coins"
+    [tableStyle]="{ 'min-width': '60rem' }"
+    class="table table-hover"
+  >
+    <ng-template pTemplate="header">
+      <tr class="tb-header">
+        <th *ngFor="let item of cols" pSortableColumn="{{ item.value }}">
+          {{ item.name }} <p-sortIcon field="{{ item.value }}"></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product class="table-group-divider">
+      <tr routerLink="/chart/{{ product.id }}" class="tr">
+        <td>
+          <b>{{ product.rank }}</b>
+        </td>
+        <td>
+          <span>
+            <img
+              src="https://assets.coincap.io/assets/icons/{{
+                product.symbol | lowercase
+              }}@2x.png"
+              alt=""
+              width="48px"
+            />
+            {{ product.name }}
+          </span>
+        </td>
+        <td>
+          {{ product.priceUsd | currency: "USD":"symbol":".2-6" }}
+        </td>
+        <td>
+          <span
+            class="gainLoss {{
+              product.changePercent24Hr > 0 ? 'gain' : 'loss'
+            }}"
+          >
+            {{ product.changePercent24Hr / 100 | percent: ".2-2" }}
+          </span>
+        </td>
+
+        <td>${{ product.marketCapUsd | shortNumber }}</td>
+        <td>{{ product.supply | shortNumber }} {{ product.symbol }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

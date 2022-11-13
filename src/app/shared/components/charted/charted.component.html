@@ -1,0 +1,17 @@
+<div
+  class="btn-group col mt-5"
+  role="group"
+  aria-label="Basic outlined example"
+>
+  <button
+    type="button"
+    *ngFor="let option of options"
+    class="btn btn-outline-primary"
+    value="{{ option.value }}"
+    (click)="selectOption(option.value)"
+    [disabled]="active === option.value"
+  >
+    {{ option.name }}
+  </button>
+</div>
+<p-chart type="line" [data]="data" *ngIf="!loading"></p-chart>
